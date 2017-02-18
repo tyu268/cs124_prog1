@@ -9,7 +9,7 @@ double random_number() {
 
 int main(int argc, const char* argv[]) {
 	
-	int n = strtol(argv[1], NULL, 10);
+	int n = strtol(argv[2], NULL, 10);
 	double matrix[n][n];
 	int i = 0, j = 0; 
 
