@@ -1,34 +1,34 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-struct set {
+typedef struct set {
   struct set *parent;
   int rank;
   int node;
-};
+} set;
 
 //display a set
-void printset(struct set* s) {
-   printf("(%d, %d, %d)\n ", s->parent->node, s->rank, s->node);
+void printset(set* s) {
+   printf("(%d, %d, %d)\n", s->parent->node, s->rank, s->node);
 }
 
-struct set* makeset(int x) {
-  struct set *s = (struct set*) malloc(sizeof(struct set));
+set* makeset(int x) {
+  set *s = (set*) malloc(sizeof(set));
   if(s == NULL) return NULL;
   s->parent = s;
   s->rank = 0;
   s->node = x;
 }
 
-struct set* find(struct set* u) {
-  struct set* p = u->parent;
+set* find(set* u) {
+  set* p = u->parent;
   if(u->node != p->node) {
     p = find(p);
   }
   return p;
 }
 
-struct set* link(struct set* u, struct set* v) {
+set* link(set* u, set* v) {
   if(u->rank > v->rank) {
     struct set* temp = u;
     u = v;
@@ -41,13 +41,15 @@ struct set* link(struct set* u, struct set* v) {
   return v;
 }
 
-void union_set(struct set* u, struct set* v) {
+void union_set(set* u, set* v) {
   link(find(u), find(v));
 }
 
+
+
 int main( int argc, const char* argv[])
 {
-  struct set* tree[10];
+  set* tree[10];
   int i;
   for (i = 0; i < 10; i++) {
     tree[i] = makeset(i);
