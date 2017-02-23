@@ -54,9 +54,23 @@ int main( int argc, const char* argv[])
   }
 
   union_set(tree[1], tree[2]);
-  union_set(tree[1], tree[3]);
+  union_set(tree[5], tree[3]);
 
   for (i = 0; i < 10; i++) {
     printset(tree[i]);
   }
 }
+
+/** procedure:
+for all u in V:
+  makeset(u)
+
+X = {}
+Sort the edges E by weight
+for all edges {u,v} in E, in increasing order of weight:
+  if find(u) != find(v):
+    add edge {u,v} to X
+    union{u,v}
+
+
+**/ 
