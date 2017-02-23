@@ -155,7 +155,7 @@ int weight(int** g, int* prev, int n) {
   return sum;
 }
 
-int main(int argc, const char* argv[]) {
+/*int main(int argc, const char* argv[]) {
   int size;
   size = 6;
   int arr[6] = {6, 3, 5, 2, 1, 4};
@@ -219,4 +219,4 @@ int main(int argc, const char* argv[]) {
   printArr(b, 7);
   printf("Sum of weights: %d\n", weight(g, a, 9));
   printf("Sum of weights: %d\n", weight(g2, b, 7));
-}
+}*/
