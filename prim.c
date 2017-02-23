@@ -145,7 +145,7 @@ int* prim(int** g, int n) {
 }
 
 int weight(int** g, int* prev, int n) {
-  int sum = 0.0;
+  int sum = 0;
   int i;
   for (i = 0; i < n; i++) {
     if (prev[i] == -1)
