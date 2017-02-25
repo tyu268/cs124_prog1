@@ -22,9 +22,40 @@ void uniform(double** g, int size) {
 }
 
 // dimension 2
-void square(double** g, int size) {
-  return;
+
+typedef struct vertex {
+  double x;
+  double y;
+} vertex;
+
+double calculate_distance(vertex point1, vertex point2) {
+  double x_dist = point2.x - point1.x;
+  double y_dist = point2.y - point1.y;
+  double distance = sqrt(pow(x_dist,2) + pow(y_dist,2)); 
+  return distance;
 }
+
+void square(double** g, int size) {
+  int i, j; 
+  srand((unsigned int)time(NULL));
+
+  vertex* vertices = malloc(size * sizeof *vertices);
+  for (i = 0; i < size; i++) {
+    vertices[i].x = random_number();
+    vertices[i].y = random_number();
+    printf("(%f, %f)\n", vertices[i].x, vertices[i].y);
+  } 
+
+  for (i = 0; i < size; i++) {
+    g[i] = malloc(size * sizeof(double*));
+    for (j = 0; j < i; j++) {
+      g[i][j] = g[j][i];
+    }
+    for (j = i; j < size; j++) {
+      g[i][j] = calculate_distance(vertices[i], vertices[j]);
+    }
+  }
+} 
 
 // dimension 3
 void cube(double** g, int size) {
