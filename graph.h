@@ -16,4 +16,6 @@ void hypercube(double** g, int size);
 
 double** initGraph(int size);
 
+void printGraph(double** g, int size);
+
 #endif

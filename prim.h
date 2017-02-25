@@ -34,6 +34,6 @@ void insert(minHeap* h, int v, int d);
 
 int* prim(double** g, int n);
 
-int weight(double** g, int* prev, int n);
+double weight(double** g, int* prev, int n);
 
 #endif

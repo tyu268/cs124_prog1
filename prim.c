@@ -111,12 +111,9 @@ void insert(minHeap* h, int v, int d) {
 }
 
 int* prim(double** g, int n) {
-  double* dist;
-  dist = malloc(sizeof(int) * n);
-  int* prev;
-  prev = malloc(sizeof(int) * n);
-  int* set;
-  set = malloc(sizeof(int) * n);
+  double* dist = malloc(sizeof(double) * n);
+  int* prev = malloc(n * sizeof(int));
+  int* set = malloc(sizeof(int) * n);
   int i;
   for (i = 0; i < n; i++) {
     dist[i] = DBL_MAX;
