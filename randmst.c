@@ -1,5 +1,6 @@
 #include <stdio.h>M
 #include <stdlib.h>
+#include <time.h>
 #include "prim.h"
 #include "graph.h"
 
@@ -26,7 +27,8 @@ int main( int argc, const char* argv[] )
 
 	// array for graph
 	void (*graph_func) (double**, int);
-	double** g = malloc(sizeof(double**));
+	double** g = malloc(numpoints * sizeof(double**));
+	srand((unsigned int) time(NULL));
 
 	switch(dimension) {
 		case 0 :
@@ -54,11 +56,15 @@ int main( int argc, const char* argv[] )
 		// re-initialize graph with numpoints points on every iteration
 		graph_func(g, numpoints);
 		// run prim on graph
-		int* edges = prim(g, numpoints);
+		printf("Graph created\n");
+		int* edges = malloc(numpoints * sizeof(int));
+		edges =	prim(g, numpoints);
+		printf("prim completed\n");
 		// run weight on array returned by prim, and add result to avg_weight
 		avg_weight += weight(g, edges, numpoints);
+		printf("avg weight added\n");
 	}
-	avg_weight /= numpoints;
+	avg_weight /= numtrials;
 	printf("Average weight for %d points for %d trials "
 				 "with graph dimension %d: %f\n",
 					numpoints, numtrials, dimension, avg_weight);
