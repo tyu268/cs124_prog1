@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 #include "prim.h"
 #include "graph.h"
 
@@ -27,6 +28,7 @@ int main( int argc, const char* argv[] )
 	// array for graph
 	void (*graph_func) (double**, int);
 	double** g = malloc(sizeof(double**));
+	srand((unsigned int) time(NULL));
 
 	switch(dimension) {
 		case 0 :

@@ -4,6 +4,8 @@
 #ifndef GRAPH_H_
 #define GRAPH_H_
 
+double random_number();
+
 void uniform(double** g, int size);
 
 void square(double** g, int size);
