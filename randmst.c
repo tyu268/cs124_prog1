@@ -1,4 +1,4 @@
-#include <stdio.h>M
+#include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
 #include "prim.h"
@@ -6,7 +6,6 @@
 
 int main( int argc, const char* argv[] )
 {
-	int input, i;
 	clock_t start, end;
 	double cpu_time_used;
 
@@ -23,13 +22,6 @@ int main( int argc, const char* argv[] )
 					numpoints, numtrials, dimension);
 
 	double avg_weight = 0.0;
-
-	int* arr = malloc(sizeof(int) * 9);
-	int i;
-	for (i = 0; i < 9; i++) {
-		arr[i] = 0;
-	}
-	printArr(arr, 9);
 
 	// array for graph
 	void (*graph_func) (double**, int);
@@ -58,17 +50,19 @@ int main( int argc, const char* argv[] )
 			return 1;
 	}
 
+	int i;
 	for (i = 0; i < numtrials; i++) {
 		// re-initialize graph with numpoints points on every iteration
 		graph_func(g, numpoints);
 		// run prim on graph
-		printf("Graph created\n");
+		//printf("Graph created\n");
 		int* edges = malloc(numpoints * sizeof(int));
 		edges =	prim(g, numpoints);
-		printf("prim completed\n");
+		//printf("prim completed\n");
 		// run weight on array returned by prim, and add result to avg_weight
 		avg_weight += weight(g, edges, numpoints);
-		printf("avg weight added\n");
+		//printf("avg weight added\n");
+		printf("Trial %d complete\n", i);
 	}
 	avg_weight /= numtrials;
 	printf("Average weight for %d points for %d trials "
@@ -77,5 +71,5 @@ int main( int argc, const char* argv[] )
 
 	end = clock();
 	cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC;
-	printf("Time used: %G\n", cpu_time_used);
+	printf("Time used: %f\n", cpu_time_used);
 }
