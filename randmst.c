@@ -1,7 +1,7 @@
 #include <stdio.h>M
 #include <stdlib.h>
-#include <errno.h>
 #include "prim.h"
+#include "graph.h"
 
 int main( int argc, const char* argv[] )
 {
@@ -25,20 +25,25 @@ int main( int argc, const char* argv[] )
 	printArr(arr, 9);
 
 	// array for graph
-	double** g;;
+	void (*graph_func) (double**, int);
+	double** g = malloc(sizeof(double**));
 
 	switch(dimension) {
 		case 0 :
 			// simple random matrix
+			graph_func = &uniform;
 			break;
 		case 2 :
 			// unit square
+			graph_func = &square;
 			break;
 		case 3 :
 			// unit cube
+			graph_func = &cube;
 			break;
 		case 4 :
 			// unit hypercube
+			graph_func = &hypercube;
 			break;
 		default :
 			printf("Invalid dimension\n");
@@ -47,8 +52,11 @@ int main( int argc, const char* argv[] )
 
 	for (i = 0; i < numtrials; i++) {
 		// re-initialize graph with numpoints points on every iteration
+		graph_func(g, numpoints);
 		// run prim on graph
+		int* edges = prim(g, numpoints);
 		// run weight on array returned by prim, and add result to avg_weight
+		avg_weight += weight(g, edges, numpoints);
 	}
 	avg_weight /= numpoints;
 	printf("Average weight for %d points for %d trials "

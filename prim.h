@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
-#include <limits.h>
+#include <float.h>
 
 #ifndef PRIM_H_
 #define PRIM_H_
@@ -32,8 +32,8 @@ int deletemin(minHeap* h);
 
 void insert(minHeap* h, int v, int d);
 
-int* prim(int** g, int n);
+int* prim(double** g, int n);
 
-int weight(int** g, int* prev, int n);
+int weight(double** g, int* prev, int n);
 
 #endif

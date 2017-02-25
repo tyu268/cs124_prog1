@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
-#include <limits.h>
+#include <float.h>
 
 #define left(x) 2 * x + 1
 #define right(x) 2 * x + 2
@@ -110,8 +110,8 @@ void insert(minHeap* h, int v, int d) {
   }
 }
 
-int* prim(int** g, int n) {
-  int* dist;
+int* prim(double** g, int n) {
+  double* dist;
   dist = malloc(sizeof(int) * n);
   int* prev;
   prev = malloc(sizeof(int) * n);
@@ -119,13 +119,13 @@ int* prim(int** g, int n) {
   set = malloc(sizeof(int) * n);
   int i;
   for (i = 0; i < n; i++) {
-    dist[i] = INT_MAX;
+    dist[i] = DBL_MAX;
     prev[i] = -1;
     set[i] = 0;
   }
   minHeap* h = initMinHeap();
   insert(h, 0, 0);
-  dist[0] = 0;
+  dist[0] = 0.0;
   while (h->size != 0) {
     int v = deletemin(h);
     set[v] = 1;
@@ -144,8 +144,8 @@ int* prim(int** g, int n) {
   return prev;
 }
 
-int weight(int** g, int* prev, int n) {
-  int sum = 0;
+double weight(double** g, int* prev, int n) {
+  double sum = 0.0;
   int i;
   for (i = 0; i < n; i++) {
     if (prev[i] == -1)

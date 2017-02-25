@@ -32,9 +32,14 @@ int main(int argc, const char* argv[]) {
 			printf("%f\n", matrix[i][j]);
 		}
 	}
-	int** arr = makeArr(5);
+
+	int** (*graph_func) (int);
+	graph_func = &(makeArr);
+	void (*print_func) (int*, int);
+	print_func = &printArr;
+	int** arr = graph_func(5);
 	for (i = 0; i < 5; i++) {
-		printArr(arr[i], 5);
+		print_func(arr[i], 5);
 	}
 
 }
