@@ -45,8 +45,6 @@ void union_set(set* u, set* v) {
   link(find(u), find(v));
 }
 
-
-
 int main( int argc, const char* argv[])
 {
   set* tree[10];

@@ -144,7 +144,18 @@ int* prim(int** g, int n) {
   return prev;
 }
 
-int main(int argc, const char* argv[]) {
+int weight(int** g, int* prev, int n) {
+  int sum = 0;
+  int i;
+  for (i = 0; i < n; i++) {
+    if (prev[i] == -1)
+      continue;
+    sum += g[prev[i]][i];
+  }
+  return sum;
+}
+
+/*int main(int argc, const char* argv[]) {
   int size;
   size = 6;
   int arr[6] = {6, 3, 5, 2, 1, 4};
@@ -204,5 +215,8 @@ int main(int argc, const char* argv[]) {
     printArr(g2[i], 7);
   }
   printf("\n");
-  printArr(prim(g2, 7), 7);
-}
+  int* b = prim(g2, 7);
+  printArr(b, 7);
+  printf("Sum of weights: %d\n", weight(g, a, 9));
+  printf("Sum of weights: %d\n", weight(g2, b, 7));
+}*/
