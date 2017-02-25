@@ -1,5 +1,5 @@
 randmst: randmst.c prim.c graph.c
-	gcc -o randmst randmst.c prim.c graph.c
+	gcc randmst.c prim.c graph.c -lm -o randmst 
 
 graph: graph.c
 	gcc graph.c -lm -o graph
@@ -11,4 +11,4 @@ kruskal: kruskal.c
 	gcc kruskal.c -o kruskal
 
 prim: prim.c
-	gcc prim.c -o prim
+	gcc prim.c -lm -o prim

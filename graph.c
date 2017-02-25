@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <math.h>
 #include <time.h>
 #include "graph.h"
 
@@ -22,7 +23,6 @@ void uniform(double** g, int size) {
 }
 
 // dimension 2
-
 typedef struct vertex {
   double x;
   double y;
