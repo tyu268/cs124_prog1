@@ -40,7 +40,7 @@ int main( int argc, const char* argv[] )
 		case 4 :
 			// unit hypercube
 			break;
-		defaultx :
+		default :
 			printf("Invalid dimension\n");
 			return 1;
 	}
