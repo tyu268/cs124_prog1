@@ -9,7 +9,7 @@
 
 typedef struct node {
   int val;
-  int dist;
+  double dist;
 } node;
 
 typedef struct minHeap {
@@ -27,7 +27,7 @@ void printHeap(minHeap* h) {
   printf("[ ");
   int i;
   for (i = 0; i < h->size; i++) {
-    printf("(%d: %d) ", h->nodes[i]->val, h->nodes[i]->dist);
+    printf("(%d: %f) ", h->nodes[i]->val, h->nodes[i]->dist);
   }
   printf("]\n");
 }
@@ -91,7 +91,7 @@ int deletemin(minHeap* h) {
   return min_val;
 }
 
-void insert(minHeap* h, int v, int d) {
+void insert(minHeap* h, int v, double d) {
   if (h->size)
     h->nodes = realloc(h->nodes, (h->size + 1) * sizeof(node*));
   else
@@ -145,8 +145,12 @@ double weight(double** g, int* prev, int n) {
   double sum = 0.0;
   int i;
   for (i = 0; i < n; i++) {
+    //int j = prev[i];
     if (prev[i] == -1)
       continue;
+    //if (i < j)
+      //sum += g[i][j];
+    //else
     sum += g[prev[i]][i];
   }
   return sum;

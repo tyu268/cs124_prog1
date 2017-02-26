@@ -56,8 +56,10 @@ int main( int argc, const char* argv[] )
 		graph_func(g, numpoints);
 		// run prim on graph
 		printf("Graph created\n");
+		//printGraph(g, numpoints);
 		int* edges = malloc(numpoints * sizeof(int));
 		edges =	prim(g, numpoints);
+		//printArr(edges, numpoints);
 		printf("prim completed\n");
 		// run weight on array returned by prim, and add result to avg_weight
 		avg_weight += weight(g, edges, numpoints);
