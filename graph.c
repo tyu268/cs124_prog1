@@ -4,6 +4,7 @@
 #include <time.h>
 #include "graph.h"
 
+// generate random number
 double random_number() {
 	return rand() / (double) RAND_MAX;
 }
@@ -23,12 +24,12 @@ void uniform(double** g, int size) {
 }
 
 // dimension 2
-typedef struct vertex {
+typedef struct vertex_2D {
   double x;
   double y;
-} vertex;
+} vertex_2D;
 
-double calculate_distance(vertex point1, vertex point2) {
+double calculate_2Ddistance(vertex_2D point1, vertex_2D point2) {
   double x_dist = point2.x - point1.x;
   double y_dist = point2.y - point1.y;
   double distance = sqrt(pow(x_dist,2) + pow(y_dist,2)); 
@@ -39,11 +40,10 @@ void square(double** g, int size) {
   int i, j; 
   srand((unsigned int)time(NULL));
 
-  vertex* vertices = malloc(size * sizeof *vertices);
+  vertex_2D* vertices = malloc(size * sizeof *vertices);
   for (i = 0; i < size; i++) {
     vertices[i].x = random_number();
     vertices[i].y = random_number();
-    printf("(%f, %f)\n", vertices[i].x, vertices[i].y);
   } 
 
   for (i = 0; i < size; i++) {
@@ -52,21 +52,89 @@ void square(double** g, int size) {
       g[i][j] = g[j][i];
     }
     for (j = i; j < size; j++) {
-      g[i][j] = calculate_distance(vertices[i], vertices[j]);
+      g[i][j] = calculate_2Ddistance(vertices[i], vertices[j]);
     }
   }
 } 
 
 // dimension 3
+typedef struct vertex_3D {
+  double x;
+  double y;
+  double z; 
+} vertex_3D;
+
+double calculate_3Ddistance(vertex_3D point1, vertex_3D point2) {
+  double x_dist = point2.x - point1.x;
+  double y_dist = point2.y - point1.y;
+  double z_dist = point2.z - point1.z;
+  double distance = sqrt(pow(x_dist,2) + pow(y_dist,2) + pow(z_dist,2)); 
+  return distance;
+}
+
 void cube(double** g, int size) {
-  return;
+  int i, j; 
+  srand((unsigned int)time(NULL));
+
+  vertex_3D* vertices = malloc(size * sizeof *vertices);
+  for (i = 0; i < size; i++) {
+    vertices[i].x = random_number();
+    vertices[i].y = random_number();
+    vertices[i].z = random_number();
+  } 
+
+  for (i = 0; i < size; i++) {
+    g[i] = malloc(size * sizeof(double*));
+    for (j = 0; j < i; j++) {
+      g[i][j] = g[j][i];
+    }
+    for (j = i; j < size; j++) {
+      g[i][j] = calculate_3Ddistance(vertices[i], vertices[j]);
+    }
+  }
 }
 
 // dimension 4
-void hypercube(double** g, int size) {
-  return;
+typedef struct vertex_4D {
+  double x;
+  double y;
+  double z; 
+  double potato;
+} vertex_4D;
+
+double calculate_4Ddistance(vertex_4D point1, vertex_4D point2) {
+  double x_dist = point2.x - point1.x;
+  double y_dist = point2.y - point1.y;
+  double z_dist = point2.z - point1.z;
+  double potato_dist = point2.potato - point1.potato;
+  double distance = sqrt(pow(x_dist,2) + pow(y_dist,2) + pow(z_dist,2) + pow(potato_dist,2)); 
+  return distance;
 }
 
+void hypercube(double** g, int size) {
+  int i, j; 
+  srand((unsigned int)time(NULL));
+
+  vertex_4D* vertices = malloc(size * sizeof *vertices);
+  for (i = 0; i < size; i++) {
+    vertices[i].x = random_number();
+    vertices[i].y = random_number();
+    vertices[i].z = random_number();
+    vertices[i].potato = random_number();
+  } 
+
+  for (i = 0; i < size; i++) {
+    g[i] = malloc(size * sizeof(double*));
+    for (j = 0; j < i; j++) {
+      g[i][j] = g[j][i];
+    }
+    for (j = i; j < size; j++) {
+      g[i][j] = calculate_4Ddistance(vertices[i], vertices[j]);
+    }
+  }
+}
+
+// helpful functions
 double** initGraph(int n) {
 	double** arr = malloc(sizeof(double**));
   return arr;
