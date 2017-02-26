@@ -25,7 +25,11 @@ int main( int argc, const char* argv[] )
 
 	// array for graph
 	void (*graph_func) (double**, int);
-	double** g = malloc(numpoints * sizeof(double**));
+	double** g = (double**) malloc(numpoints * sizeof(double*));
+	int j;
+	for (j = 0; j < numpoints; j++) {
+		g[j] = (double*) malloc(numpoints * sizeof(double));
+	}
 	srand((unsigned int) time(NULL));
 
 	switch(dimension) {
@@ -68,6 +72,9 @@ int main( int argc, const char* argv[] )
 		free(edges);
 		printf("avg weight added\n");
 		//printf("Trial %d complete\n", i);
+		/*for (i = 0; i < numpoints; i++) {
+			free(g[i]);
+		}*/
 		end = clock();
 		cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC;
 		printf("Time so far: %f\n", cpu_time_used);

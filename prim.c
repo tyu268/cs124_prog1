@@ -143,6 +143,8 @@ int* prim(double** g, int n) {
     //printArr(prev, n);
     //printHeap(h);
   }
+  free(dist);
+  free(set);
   return prev;
 }
 
