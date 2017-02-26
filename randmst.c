@@ -64,7 +64,7 @@ int main( int argc, const char* argv[] )
 		// run weight on array returned by prim, and add result to avg_weight
 		avg_weight += weight(g, edges, numpoints);
 		printf("avg weight added\n");
-		printf("Trial %d complete\n", i);
+		//printf("Trial %d complete\n", i);
 		end = clock();
 		cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC;
 		printf("Time so far: %f\n", cpu_time_used);

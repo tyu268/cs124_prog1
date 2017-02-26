@@ -70,7 +70,7 @@ minHeap* build_heap(minHeap* h, int* arr, int size) {
   for (i = 0; i < size; i++) {
     node* n = malloc(sizeof(node));
     n->val = arr[i];
-    n->dist = 0;
+    n->dist = 0.0;
     h->nodes[h->size] = n;
     h->size++;
   }
