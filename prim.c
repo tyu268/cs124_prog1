@@ -128,8 +128,13 @@ int* prim(double** g, int n) {
     set[v] = 1;
     int w;
     for(w = 0; w < n; w++) {
-      if (set[w] == 0 && g[v][w] != 0 && dist[w] > g[v][w]) {
-        dist[w] = g[v][w];
+      double edge;
+      if (v < w)
+        edge = g[v][w];
+      else
+        edge = g[w][v];
+      if (set[w] == 0 && edge != 0 && dist[w] > edge) {
+        dist[w] = edge;
         prev[w] = v;
         insert(h, w, dist[w]);
       }
@@ -145,13 +150,13 @@ double weight(double** g, int* prev, int n) {
   double sum = 0.0;
   int i;
   for (i = 0; i < n; i++) {
-    //int j = prev[i];
-    if (prev[i] == -1)
+    int j = prev[i];
+    if (j == -1)
       continue;
-    //if (i < j)
-      //sum += g[i][j];
-    //else
-    sum += g[prev[i]][i];
+    if (i < j)
+      sum += g[i][j];
+    else
+      sum += g[j][i];
   }
   return sum;
 }
