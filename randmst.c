@@ -15,7 +15,7 @@ int main( int argc, const char* argv[] )
 		printf("Invalid input\n");
 		return 1;
 	}
-  int numpoints = strtol(argv[2], NULL, 10);
+    int numpoints = strtol(argv[2], NULL, 10);
 	int numtrials = strtol(argv[3], NULL, 10);
 	int dimension = strtol(argv[4], NULL, 10);
 	printf("numpoints: %d; numtrials: %d; dimension: %d\n",
@@ -63,7 +63,9 @@ int main( int argc, const char* argv[] )
 		avg_weight += weight(g, edges, numpoints);
 		//printf("avg weight added\n");
 		printf("Trial %d complete\n", i);
+		free(edges);
 	}
+
 	avg_weight /= numtrials;
 	printf("Average weight for %d points for %d trials "
 				 "with graph dimension %d: %f\n",
