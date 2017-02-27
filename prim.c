@@ -151,10 +151,12 @@ int* prim(double** g, int n) {
 double weight(double** g, int* prev, int n) {
   double sum = 0.0;
   int i;
-  for (i = 0; i < n; i++) {
+  for (i = 1; i < n; i++) {
     int j = prev[i];
-    if (j == -1)
+    if (j == -1) {
+      printf("no prev for node %d\n", i);
       continue;
+    }
     if (i < j)
       sum += g[i][j];
     else
