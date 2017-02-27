@@ -128,11 +128,11 @@ int* prim(double** g, int n) {
     set[v] = 1;
     int w;
     for(w = 0; w < n; w++) {
-      double edge;
-      if (v < w)
+      double edge = g[v][w];
+      /*if (v < w)
         edge = g[v][w];
       else
-        edge = g[w][v];
+        edge = g[w][v];*/
       if (set[w] == 0 && edge != 0 && dist[w] > edge) {
         dist[w] = edge;
         prev[w] = v;
@@ -143,6 +143,8 @@ int* prim(double** g, int n) {
     //printArr(prev, n);
     //printHeap(h);
   }
+  free(dist);
+  free(set);
   return prev;
 }
 
