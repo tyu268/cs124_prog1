@@ -26,13 +26,11 @@ int main( int argc, const char* argv[] )
 	// array for graph
 	void (*graph_func) (double**, int);
 	double** g = (double**) malloc(numpoints * sizeof(double*));
-	int j;
+	int i, j;
 	for (j = 0; j < numpoints; j++) {
 		g[j] = (double*) malloc(numpoints * sizeof(double));
-		if (j % 5000 == 0) {
-			printf("Graph row %d initialized\n", j);
-		}
 	}
+
 	srand((unsigned int) time(NULL));
 
 	switch(dimension) {
@@ -57,28 +55,22 @@ int main( int argc, const char* argv[] )
 			return 1;
 	}
 
-	int i;
 	int* edges = malloc(numpoints * sizeof(int));
 	for (i = 0; i < numtrials; i++) {
 		// re-initialize graph with numpoints points on every iteration
 		graph_func(g, numpoints);
-		// run prim on graph
 		printf("Graph created\n");
-		//printGraph(g, numpoints);
-		
+
+		// run prim on graph
 		edges =	prim(g, numpoints);
-		//printArr(edges, numpoints);
+
 		printf("prim completed\n");
 		// run weight on array returned by prim, and add result to avg_weight
 		double x = weight(g, edges, numpoints);
 		avg_weight += x;
 		printf("avg weight added: %f\n", x);
 		printf("Trial %d complete\n", i);
-		
-		//printf("Trial %d complete\n", i);
-		/*for (i = 0; i < numpoints; i++) {
-			free(g[i]);
-		}*/
+
 		end = clock();
 		cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC;
 		printf("Time so far: %f\n", cpu_time_used);

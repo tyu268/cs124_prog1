@@ -45,8 +45,10 @@ double calculate_2Ddistance(vertex_2D point1, vertex_2D point2) {
 
 void square(double** g, int size) {
   int i, j;
-  double num, limiter;
+	double num, limiter;
   srand((unsigned int)time(NULL));
+
+	limiter = 0.09;
 
   // create array of (x, y) points
   vertex_2D* vertices = malloc(size * sizeof *vertices);
@@ -55,23 +57,19 @@ void square(double** g, int size) {
     vertices[i].y = random_number();
   }
 
-  limiter = 0.01; 
-
   for (i = 0; i < size; i++) {
     for (j = i + 1; j < size; j++) {
       num = calculate_2Ddistance(vertices[i], vertices[j]);
-      
-      if (num > limiter) {
-        g[i][j] = g[j][i] = 0;
-      }
-      else {
-        g[i][j] = g[j][i] = num;
-      }
-    }
-    if(i % 5000 == 0) {
-      printf("Row %d created\n", i);
-    }
+
+			if (num > limiter) {
+				g[i][j] = g[j][i] = 0;
+			}
+			else {
+				g[i][j] = g[j][i] = num;
+			}
+		}
   }
+	
   free(vertices);
 }
 
@@ -92,7 +90,10 @@ double calculate_3Ddistance(vertex_3D point1, vertex_3D point2) {
 
 void cube(double** g, int size) {
   int i, j;
+	double num, limiter;
   srand((unsigned int)time(NULL));
+
+	limiter = 0.03;
 
   // create array of (x, y, z) points
   vertex_3D* vertices = malloc(size * sizeof *vertices);
@@ -104,9 +105,17 @@ void cube(double** g, int size) {
 
   for (i = 0; i < size; i++) {
     for (j = i + 1; j < size; j++) {
-      g[i][j] = g[j][i] = calculate_3Ddistance(vertices[i], vertices[j]);
+			num = calculate_3Ddistance(vertices[i], vertices[j]);
+      if (num > limiter) {
+			  g[i][j] = g[j][i] = 0;
+		  }
+      else {
+        g[i][j] = g[j][i] = num;
+      }
     }
   }
+	
+  free(vertices);
 }
 
 // dimension 4
@@ -128,7 +137,7 @@ double calculate_4Ddistance(vertex_4D point1, vertex_4D point2) {
 
 void hypercube(double** g, int size) {
   int i, j;
-  double num; 
+	double num;
   srand((unsigned int)time(NULL));
 
   // create array of (x, y, z, potato) points
@@ -142,9 +151,17 @@ void hypercube(double** g, int size) {
 
   for (i = 0; i < size; i++) {
     for (j = i + 1; j < size; j++) {
-      g[i][j] = g[j][i] = calculate_4Ddistance(vertices[i], vertices[j]);
+      num = calculate_4Ddistance(vertices[i], vertices[j]);
+			if (num > 0.09) {
+				g[i][j] = g[j][i] = 0;
+			}
+			else {
+				g[i][j] = g[j][i] = num;
+			}
     }
   }
+	
+  free(vertices);
 }
 
 // helpful functions
