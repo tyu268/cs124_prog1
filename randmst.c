@@ -70,11 +70,11 @@ int main( int argc, const char* argv[] )
 		//printArr(edges, numpoints);
 		printf("prim completed\n");
 		// run weight on array returned by prim, and add result to avg_weight
-		avg_weight += weight(g, edges, numpoints);
-		//printf("avg weight added\n");
+		double x = weight(g, edges, numpoints);
+		avg_weight += x;
+		printf("avg weight added: %f\n", x);
 		printf("Trial %d complete\n", i);
 		
-		printf("avg weight added\n");
 		//printf("Trial %d complete\n", i);
 		/*for (i = 0; i < numpoints; i++) {
 			free(g[i]);
