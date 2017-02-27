@@ -15,7 +15,7 @@ void uniform(double** g, int size) {
   srand((unsigned int)time(NULL));
 
   for (i = 0; i < size; i++) {
-    g[i] = malloc(size * sizeof(double*));
+    //g[i] = malloc(size * sizeof(double*));
     for (j = 0; j < i; j++) {
       g[i][j] = g[j][i];
     }
