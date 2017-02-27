@@ -1,5 +1,5 @@
 randmst: randmst.c prim.c graph.c
-	gcc randmst.c prim.c graph.c -lm -o randmst 
+	gcc -O3 randmst.c prim.c graph.c -lm -o randmst 
 
 graph: graph.c
 	gcc graph.c -lm -o graph

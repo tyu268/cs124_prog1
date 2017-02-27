@@ -153,8 +153,10 @@ double weight(double** g, int* prev, int n) {
   int i;
   for (i = 0; i < n; i++) {
     int j = prev[i];
-    if (j == -1)
+    if (j == -1) {
+      printf("node %d has no prev\n", j);
       continue;
+    }
     if (i < j)
       sum += g[i][j];
     else

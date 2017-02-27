@@ -23,8 +23,17 @@ void uniform(double** g, int size) {
 			double rand = random_number();
 			g[i][j] = rand;
     }*/
-		for (j = i; j < size; j++) {
-			g[i][j] = g[j][i] = random_number();
+		for (j = i + 1; j < size; j++) {
+			double rand = random_number();
+			if (rand > 0.000125) {
+				g[i][j] = g[j][i] = 0;
+			}
+			else {
+				g[i][j] = g[j][i] = rand;
+			}
+		}
+		if (i % 5000 == 0) {
+			printf("Row %d complete\n", i);
 		}
 	}
 }
