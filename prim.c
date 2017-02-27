@@ -123,6 +123,7 @@ int* prim(double** g, int n) {
   minHeap* h = initMinHeap();
   insert(h, 0, 0);
   dist[0] = 0.0;
+  int count = 0;
   while (h->size != 0) {
     int v = deletemin(h);
     set[v] = 1;
@@ -142,6 +143,10 @@ int* prim(double** g, int n) {
     //printf("Node %d: \n", v);
     //printArr(prev, n);
     //printHeap(h);
+    count++;
+    if (count % 5000 == 0) {
+      printf("Prim has looked at %d nodes\n", count);
+    }
   }
   free(dist);
   free(set);

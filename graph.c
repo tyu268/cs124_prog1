@@ -45,7 +45,10 @@ double calculate_2Ddistance(vertex_2D point1, vertex_2D point2) {
 
 void square(double** g, int size) {
   int i, j;
+	double num, limiter;
   srand((unsigned int)time(NULL));
+
+	limiter = 0.09;
 
   vertex_2D* vertices = malloc(size * sizeof *vertices);
   for (i = 0; i < size; i++) {
@@ -55,9 +58,16 @@ void square(double** g, int size) {
 
   for (i = 0; i < size; i++) {
     for (j = i + 1; j < size; j++) {
-      g[i][j] = g[j][i] = calculate_2Ddistance(vertices[i], vertices[j]);
-    }
+      num = calculate_2Ddistance(vertices[i], vertices[j]);
+			if (num > limiter) {
+				g[i][j] = g[j][i] = 0;
+			}
+			else {
+				g[i][j] = g[j][i] = num;
+			}
+		}
   }
+	free(vertices);
 }
 
 // dimension 3
@@ -77,7 +87,10 @@ double calculate_3Ddistance(vertex_3D point1, vertex_3D point2) {
 
 void cube(double** g, int size) {
   int i, j;
+	double num, limiter;
   srand((unsigned int)time(NULL));
+
+	limiter = 0.03;
 
   vertex_3D* vertices = malloc(size * sizeof *vertices);
   for (i = 0; i < size; i++) {
@@ -88,9 +101,17 @@ void cube(double** g, int size) {
 
   for (i = 0; i < size; i++) {
     for (j = i + 1; j < size; j++) {
-      g[i][j] = g[j][i] = calculate_3Ddistance(vertices[i], vertices[j]);
+			num = calculate_3Ddistance(vertices[i], vertices[j]);
+      if (num > limiter) {
+			  g[i][j] = g[j][i] = 0;
+		  }
+      else {
+        g[i][j] = g[j][i] = num;
+      }
+			//g[i][j] = g[j][i] = num;
     }
   }
+	free(vertices);
 }
 
 // dimension 4
@@ -112,6 +133,7 @@ double calculate_4Ddistance(vertex_4D point1, vertex_4D point2) {
 
 void hypercube(double** g, int size) {
   int i, j;
+	double num;
   srand((unsigned int)time(NULL));
 
   vertex_4D* vertices = malloc(size * sizeof *vertices);
@@ -124,9 +146,19 @@ void hypercube(double** g, int size) {
 
   for (i = 0; i < size; i++) {
     for (j = i + 1; j < size; j++) {
-      g[i][j] = g[j][i] = calculate_4Ddistance(vertices[i], vertices[j]);
+      num = calculate_4Ddistance(vertices[i], vertices[j]);
+			if (num > 0.09) {
+				g[i][j] = g[j][i] = 0;
+			}
+			else {
+				g[i][j] = g[j][i] = num;
+			}
     }
+		if (i % 5000 == 0) {
+			printf("Row %d created\n", i);
+		}
   }
+	free(vertices);
 }
 
 // helpful functions
