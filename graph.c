@@ -16,11 +16,12 @@ void uniform(double** g, int size) {
 
   for (i = 0; i < size; i++) {
     //g[i] = malloc(size * sizeof(double*));
-    /*for (j = 0; j < i; j++) {
+    for (j = 0; j < i; j++) {
       g[i][j] = g[j][i];
-    }*/
+    }
     for (j = i + 1; j < size; j++) {
-      g[i][j] = random_number();
+			double rand = random_number();
+			g[i][j] = rand;
     }
   }
 }
