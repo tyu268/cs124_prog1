@@ -15,17 +15,9 @@ void uniform(double** g, int size) {
   double num, limiter;
   srand((unsigned int)time(NULL));
 
-  limiter = 0.064 * 1 / (pow(2, log2(size)))
+  limiter = 0.064 * (pow(2, log2(size)));
 
   for (i = 0; i < size; i++) {
-    //g[i] = malloc(size * sizeof(double*));
-    /*for (j = 0; j < i; j++) {
-      g[i][j] = g[j][i];
-    }
-    for (j = i + 1; j < size; j++) {
-			double rand = random_number();
-			g[i][j] = rand;
-    }*/
     for (j = i + 1; j < size; j++) {
       num = random_number();
       if (num > limiter) {
