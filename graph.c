@@ -15,7 +15,7 @@ void uniform(double** g, int size) {
   double num, limiter;
   srand((unsigned int)time(NULL));
 
-  limiter = 0.064 * (pow(2, log2(size)));
+  limiter = 0.001;
 
   for (i = 0; i < size; i++) {
     for (j = i + 1; j < size; j++) {
