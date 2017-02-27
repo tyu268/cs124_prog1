@@ -29,6 +29,9 @@ int main( int argc, const char* argv[] )
 	int j;
 	for (j = 0; j < numpoints; j++) {
 		g[j] = (double*) malloc(numpoints * sizeof(double));
+		if (j % 5000 == 0) {
+			printf("Graph row %d initialized\n", j);
+		}
 	}
 	srand((unsigned int) time(NULL));
 

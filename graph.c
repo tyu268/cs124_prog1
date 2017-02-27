@@ -12,8 +12,10 @@ double random_number() {
 // dimension 0
 void uniform(double** g, int size) {
   int i, j;
-  double num;
+  double num, limiter;
   srand((unsigned int)time(NULL));
+
+  limiter = 0.064 * 1 / (pow(2, log2(size)))
 
   for (i = 0; i < size; i++) {
     //g[i] = malloc(size * sizeof(double*));
@@ -26,14 +28,13 @@ void uniform(double** g, int size) {
     }*/
     for (j = i + 1; j < size; j++) {
       num = random_number();
-      if (num > 0.00025) {
+      if (num > limiter) {
 			  g[i][j] = g[j][i] = 0;
 		  }
       else {
         g[i][j] = g[j][i] = num;
       }
     }
-
 	}
 }
 
