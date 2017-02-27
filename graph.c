@@ -15,7 +15,7 @@ void uniform(double** g, int size) {
   srand((unsigned int)time(NULL));
 
   for (i = 0; i < size; i++) {
-    g[i] = calloc(size, sizeof(double*));
+    g[i] = malloc(size * sizeof(double*));
     /*for (j = 0; j < i; j++) {
       g[i][j] = g[j][i];
     }*/
@@ -50,9 +50,6 @@ void square(double** g, int size) {
 
   for (i = 0; i < size; i++) {
     g[i] = malloc(size * sizeof(double*));
-    for (j = 0; j < i; j++) {
-      g[i][j] = g[j][i];
-    }
     for (j = i + 1; j < size; j++) {
       g[i][j] = calculate_2Ddistance(vertices[i], vertices[j]);
     }
@@ -87,10 +84,7 @@ void cube(double** g, int size) {
 
   for (i = 0; i < size; i++) {
     g[i] = malloc(size * sizeof(double*));
-    for (j = 0; j < i; j++) {
-      g[i][j] = g[j][i];
-    }
-    for (j = i; j < size; j++) {
+    for (j = i + 1; j < size; j++) {
       g[i][j] = calculate_3Ddistance(vertices[i], vertices[j]);
     }
   }
@@ -127,10 +121,7 @@ void hypercube(double** g, int size) {
 
   for (i = 0; i < size; i++) {
     g[i] = malloc(size * sizeof(double*));
-    for (j = 0; j < i; j++) {
-      g[i][j] = g[j][i];
-    }
-    for (j = i; j < size; j++) {
+    for (j = i + 1; j < size; j++) {
       g[i][j] = calculate_4Ddistance(vertices[i], vertices[j]);
     }
   }

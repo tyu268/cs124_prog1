@@ -51,13 +51,14 @@ int main( int argc, const char* argv[] )
 	}
 
 	int i;
+	int* edges = malloc(numpoints * sizeof(int));
 	for (i = 0; i < numtrials; i++) {
 		// re-initialize graph with numpoints points on every iteration
 		graph_func(g, numpoints);
 		// run prim on graph
 		printf("Graph created\n");
 		//printGraph(g, numpoints);
-		int* edges = malloc(numpoints * sizeof(int));
+		
 		edges =	prim(g, numpoints);
 		//printArr(edges, numpoints);
 		printf("prim completed\n");
@@ -65,13 +66,14 @@ int main( int argc, const char* argv[] )
 		avg_weight += weight(g, edges, numpoints);
 		//printf("avg weight added\n");
 		printf("Trial %d complete\n", i);
-		free(edges);
+		
 		printf("avg weight added\n");
 		//printf("Trial %d complete\n", i);
 		end = clock();
 		cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC;
 		printf("Time so far: %f\n", cpu_time_used);
 	}
+	free(edges);
 
 	avg_weight /= numtrials;
 	printf("Average weight for %d points for %d trials "
